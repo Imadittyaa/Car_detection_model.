@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Detection</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: sans-serif;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 416px;
+            margin: 0 auto;
+        }
+        #can {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        /* Hidden off-screen instead of display:none, so mobile browsers keep decoding frames */
+        #live {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #metrics-panel {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #00FF00;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            line-height: 1.4;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .controls {
+            max-width: 416px;
+            margin: 10px auto 0;
+            display: flex;
+            gap: 8px;
+        }
+        .controls button {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="video-container">
+            <!-- Hidden camera source; frames are drawn onto the canvas by script.js -->
+            <video id="live" autoplay playsinline muted></video>
+            <canvas id="can" width="320" height="320"></canvas>
+
+            <div id="metrics-panel">
+                <div>Backend FPS: <span id="m-backend-fps">-</span></div>
+                <div>Camera FPS: <span id="m-client-fps">-</span></div>
+                <div>WS Latency (RTT): <span id="m-ws-latency">-</span> ms</div>
+                <div>YOLO Inference: <span id="m-inference">-</span> ms</div>
+                <div>Skipped Frames: <span id="m-dropped">-</span></div>
+                <div>Server CPU: <span id="m-cpu">-</span>%</div>
+                <div>Server GPU: <span id="m-gpu">-</span>%</div>
+            </div>
+        </section>
+        <div class="controls">
+            <button id="play">Start</button>
+            <button id="end">Stop</button>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
