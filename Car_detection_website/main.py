@@ -11,7 +11,7 @@ from backend.preprocessor import Preprocessor
 # Paths are built from this file's location, so the server works
 # no matter which folder uvicorn is started from.
 BASE_DIR = Path(__file__).resolve().parent
-FRONTEND_DIR = BASE_DIR / "frontend"
+FRONTEND_DIR = BASE_DIR / "vercel-frontend"
 MODEL_PATH = BASE_DIR / "model" / "best.onnx"
 
 app = FastAPI(
