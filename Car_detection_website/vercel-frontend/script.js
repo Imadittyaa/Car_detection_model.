@@ -17,7 +17,7 @@ const elGpu = document.getElementById("m-gpu");
 // ---------- Config ----------
 // Backend address WITHOUT https://  e.g. "my-app.onrender.com"
 // Leave empty ("") when the backend serves this page itself.
-const BACKEND_HOST = "";
+const BACKEND_HOST = "cardetectionmodel-production.up.railway.app";
 
 const FRAME_SIZE = 320;            // model input size (square)
 const JPEG_QUALITY = 0.5;
