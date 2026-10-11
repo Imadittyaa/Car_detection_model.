@@ -1,0 +1,12 @@
+# ---- Web server ----
+fastapi
+uvicorn[standard]      # [standard] includes the WebSocket library
+
+# ---- Model / vision (no PyTorch, no Ultralytics) ----
+onnxruntime
+opencv-python-headless
+numpy
+
+# ---- Metrics ----
+psutil
+# nvidia-ml-py         # optional: real GPU usage on an NVIDIA machine
