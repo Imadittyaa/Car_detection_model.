@@ -89,23 +89,11 @@ class Preprocessor:
         if frame.shape[:2] != (FRAME_SIZE, FRAME_SIZE):
             frame = cv2.resize(frame, (FRAME_SIZE, FRAME_SIZE))
 
-        t_infer = time.perf_counter()
-        result = self.predictor.predict_frame(frame)
-        total_ms = (time.perf_counter() - t_infer) * 1000
-
-        # Prefer Ultralytics' own model-only timing; fall back to the wall-clock time
-        speed = getattr(result, "speed", None) or {}
-        inference_ms = round(float(speed.get("inference", total_ms)), 2)
+        # Slim predictor returns plain dicts plus the model-only time in ms
+        detections, model_ms = self.predictor.predict_frame(frame)
+        inference_ms = round(float(model_ms), 2)
 
         fps = self._update_fps()
-
-        detections = []
-        for box in result.boxes:
-            detections.append({
-                "class": result.names[int(box.cls[0])],
-                "confidence": round(float(box.conf[0]), 2),
-                "bbox": [int(v) for v in box.xyxy[0].tolist()],
-            })
 
         cpu_usage, ram_usage, gpu_usage = self.get_system_stats()
 
